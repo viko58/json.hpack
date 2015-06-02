@@ -27,14 +27,11 @@ function json_hpack($collection, $compression = 0){
             $header[] = $key;
         $len = count($header);
         for($length = count($collection), $i = 0; $i < $length; ++$i){
-            for(
-                $item   = $collection[$i],
-                $row    = array(),
-                $j      = 0;
-                $j < $len; ++$j
-            )
-                $row[$j] = $item->$header[$j];
-            $result[] = $row;
+             $row = array();
+                for ($item = $collection[$i], $j = 0; $j < $len; ++ $j){
+                    $row[$j] = $item[$header[$j]];
+                }
+                $result[] = $row;
         }
         $index  = count($result);
         if(0 < $compression){
